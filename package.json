@@ -1,0 +1,12 @@
+{
+  "name": "kaku",
+  "version": "1.0.0",
+  "description": "Turn On/Off KlikAanKlikUit appliances",
+  "main": "kaku.js",
+  "bin": {
+  	"kaku": "kaku.js"
+  },
+  "keywords": [],
+  "author": "Jonathan Diehl",
+  "license": "MIT"
+}

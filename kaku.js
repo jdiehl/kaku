@@ -8,6 +8,7 @@ var HOST = process.env.KAKU_HOST;
 var PORT = process.env.KAKU_PORT || 9760;
 
 function parseBool(string) {
+  if (string === undefined) return undefined
   switch (string.toLowerCase()) {
   case 'true':
   case 'on':
@@ -22,8 +23,17 @@ function parseBool(string) {
   }
 }
 
+// set up listening server
+if (process.env.DEBUG) {
+  var server = dgram.createSocket('udp4');
+  server.on('message', msg => {
+    console.log(msg.toString('utf8'))
+  })
+}
+
 function send(room, device, onOff, callback) {
   var message = '001,!R' + room + 'D' + device + 'F' + (onOff ? 1 : 0) + '|kaku|' + (onOff ? 'On' : 'Off');
+  server.bind(9761)
   var client = dgram.createSocket('udp4');
   client.send(message, 0, message.length, PORT, HOST, function (err) {
     client.close();
@@ -40,7 +50,7 @@ if (!HOST || !PORT) {
   process.exit(-2);
 }
 
-if (room === undefined || device === undefined || onOff === undefined) {
+if (room === NaN || device === NaN || onOff === undefined) {
   console.log(' Usage: kaku [ROOM_ID] [DEVICE_ID] [ON_OFF]');
   process.exit(-1);
 }

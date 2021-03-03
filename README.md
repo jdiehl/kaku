@@ -4,8 +4,10 @@ Currently only turning applicances On and Off is supported.
 
 # Setup
 
-* Set the environment variable `KAKU_HOST=IP`
-* (Optional) set the environment variable `KAKU_PORT=IP`, default `9760` should work in most cases
+* Set the environment variable `KAKU_HOST`
+* (Optional) set the environment variable `KAKU_PORT`, default `9760` should work in most cases
+* (Optional) set `DEBUG` to show responses from ICS-1000
+* After executing the first command, you must link the sender to the ICS by tapping a button
 
 # Usage
 
